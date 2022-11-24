@@ -23,8 +23,8 @@ Registration Page
                             {% csrf_token %}
                             {% for fm in form %}
                             <div class="form-group row">
-                                <label for="inputName" class="col-sm-1-12 col-form-label">{{fm.label_tag}}</label>
-                                <div class="col-sm-1-12">
+                                <label for="inputName" class="col-md-12 col-form-label">{{fm.label_tag}}</label>
+                                <div class="col-md-12">
                                     {{fm}}
                                     <label class="text-danger"><small>{{fm.errors|striptags}}</small></label>
                                 </div>
