@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Blog,EditorForm
+from .models import Blog,EditorForm,Contact
 
 
 admin.site.site_header = "Mini-Blog Admin"
@@ -15,3 +15,7 @@ class BlogAdmin(admin.ModelAdmin):
 @admin.register(EditorForm)
 class EditorFormAdmin(admin.ModelAdmin):
     list_display = ['subject','user','message','portfolio_url','created_at']
+    
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ['name','email','subject']

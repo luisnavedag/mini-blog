@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Blog, EditorForm
-from .form import EditorFM
+from .models import Blog, EditorForm, Contact
+from .form import EditorFM, ContactForm
 from django.contrib.auth.decorators import login_required 
 from django.contrib.auth.models import Group
 
@@ -14,7 +14,18 @@ def AboutView(request):
     return render(request,'about.html')
 
 def ContactView(request):
-    return render(request,'contact.html')
+    fm = ContactForm()
+    if request.method == "POST":
+        fm = ContactForm(request.POST)
+        if fm.is_valid():
+            name = fm.cleaned_data['name']
+            email = fm.cleaned_data['email']
+            subject = fm.cleaned_data['subject']
+            message = fm.cleaned_data['message']
+            cont = Contact(name=name,email=email,subject=subject,message=message)
+            cont.save()
+            return redirect("home")
+    return render(request,'contact.html',{'form':fm})
 
 @login_required(login_url="login")
 def PostView(request, pk):
